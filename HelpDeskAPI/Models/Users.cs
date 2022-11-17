@@ -3,6 +3,7 @@ using MySql.Data.MySqlClient;
 
 namespace HelpDeskAPI
 {
+    [Table("users")]
     public class Users
     {
         [Key]

@@ -33,13 +33,13 @@ namespace HelpDeskAPI.Controllers
         [HttpDelete("{ticket_id}")]
         public void Delete(int id)
         {
-            DAL.Delete(id);
+            DAL.DeleteTicket(id);
         }
 
         [HttpPut]
         public void Update(Tickets ticket)
         {
-            DAL.Update(ticket);
+            DAL.UpdateTicket(ticket);
         }
     }
 }

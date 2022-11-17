@@ -15,8 +15,8 @@ namespace HelpDeskAPI
         public string title { get; set; }
         public string status { get; set; }
         public string details { get; set; }
-        public int resolvedby_id { get; set; }
-        public string resolvedby_name { get; set; }
+        public int? resolvedby_id { get; set; }
+        public string? resolvedby_name { get; set; }
         public string resolution { get; set; }
 
         public TicketView(Tickets ticket, Users requester, Users assignee, Users? resolvedby)
@@ -28,8 +28,8 @@ namespace HelpDeskAPI
             assignee_id = assignee.user_id;
             assignee_name = assignee.user_name;
             assignee_email = assignee.user_email;
-            resolvedby_id = resolvedby.user_id;
-            resolvedby_name = resolvedby.user_name;
+            resolvedby_id = resolvedby?.user_id ;
+            resolvedby_name = resolvedby?.user_name;
             title = ticket.subject_title;
             status = ticket.ticket_status;
             details = ticket.ticket_details;
