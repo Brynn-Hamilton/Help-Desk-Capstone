@@ -7,9 +7,21 @@ namespace HelpDeskAPI.Controllers
     [ApiController]
     public class TicketsController : ControllerBase
     {
-        public IEnumerable<Tickets> GetAll()
+        public IEnumerable<TicketView> GetAll()
         {
-            return DAL.GetAllTickets();
+             List<Tickets> tickets = DAL.GetAllTickets();
+             List<Users> users = DAL.GetAllUsers();
+             List<TicketView> ticketViews = new List<TicketView>();
+            foreach(Tickets ticket in tickets)
+            {
+                TicketView finalTicketView = new TicketView(
+                    ticket, 
+                    users.First(x => x.user_id == ticket.requester_id), 
+                    users.First(x => x.user_id == ticket.assignee_id), 
+                    users.FirstOrDefault(x => x.user_id == ticket.resolvedby_id));
+                ticketViews.Add(finalTicketView);
+            }
+            return ticketViews;
         }
 
         [HttpPost]

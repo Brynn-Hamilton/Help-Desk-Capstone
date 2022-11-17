@@ -12,20 +12,22 @@ namespace HelpDeskAPI
         {
             return DB.GetAll<Tickets>().ToList();
         }
+        public static Tickets GetOne(int id)
+        {
+            return DB.Get<Tickets>(id);
+        }
 
-        //should this reference ticketview
         public static Tickets AddTicket(Tickets ticket)
         {
             DB.Insert(ticket);
             return ticket;
         }
 
-        public static void DeleteTicket(int ticket_id)
+        public static void DeleteTicket(int id)
         {
-            DB.Delete(new Tickets() { ticket_id = ticket_id });
+            DB.Delete(new Tickets() { ticket_id = id });
         }
 
-        //should this reference ticketview
         public static void UpdateTicket(Tickets ticket)
         {
             DB.Update(ticket);
@@ -36,8 +38,6 @@ namespace HelpDeskAPI
         {
             return DB.GetAll<Users>().ToList();
         }
-
-        //should this reference ticketview
         public static Users AddUser(Users user)
         {
             DB.Insert(user);
@@ -49,16 +49,25 @@ namespace HelpDeskAPI
             DB.Delete(new Users() { user_id = user_id });
         }
 
-        //should this reference ticketview
         public static void UpdateUser(Users user)
         {
             DB.Update(user);
         }
 
-        // ----------------Ticket View------------------------
-        public static List<TicketView> GetAll()
+        // ----------------Favorites------------------------
+        public static List<Favorites> GetAllFavorites()
         {
-            return DB.GetAll<TicketView>().ToList();
+            return DB.GetAll<Favorites>().ToList();
+        }
+        public static Favorites AddFavorite(Favorites fav)
+        {
+            DB.Insert(fav);
+            return fav;
+        }
+
+        public static void DeleteFavorite(int ticket_id, int user_id)
+        {
+            DB.Delete(new Favorites() { ticket_id = ticket_id, user_id = user_id });
         }
     }
 }
