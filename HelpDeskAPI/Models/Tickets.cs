@@ -6,7 +6,7 @@ namespace HelpDeskAPI
     [Table("tickets")]
     public class Tickets
     {
-        [ExplicitKey]
+        [Key]
         public int ticket_id { get; set; }
         public int requester_id { get; set; }
         public int assignee_id { get; set; }

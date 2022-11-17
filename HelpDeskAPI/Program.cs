@@ -1,3 +1,6 @@
+using MySql.Data.MySqlClient;
+using HelpDeskAPI;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -21,5 +24,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+string connstring = app.Configuration.GetConnectionString("db");
+DAL.DB = new MySqlConnection(connstring);
 
 app.Run();
