@@ -50,6 +50,9 @@ export class TicketviewDetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  viewDetails(){
+    this.detailsMode = true;
+  }
   turnOnEdit(){
    this.editObject.id = this.ticket.id;
    this.editObject.requester_id = this.ticket.requester_id;

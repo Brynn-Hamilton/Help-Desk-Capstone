@@ -22,15 +22,4 @@ export class UserListComponent implements OnInit {
       }
     )
   }
-  
-updateOne(ticket: Users){
-  this.UserSrv.update(
-    () => {
-
-    },
-
-    ticket
-  );
-}
-
 }

@@ -1,8 +1,35 @@
-<div>
+<div *ngIf="!addMode">
+    <button (click)="showAddForm()">New Ticket</button>
     <ng-container *ngFor="let ticket of TheList">
         <app-ticketview-detail [ticket]="ticket"
         (delete)="deleteOne($event)"
         (update)="updateOne($event)"
         ></app-ticketview-detail>
-    </ng-container>
+    </ng-container> 
 </div> 
+
+<div *ngIf="addMode">
+    <div>
+
+        <h1>Add New Ticket</h1>
+        <!--Set names to drop down only-->
+        Requested By: <input type="text" [(ngModel)]="newRequester_name" /> <br/>
+
+        Assigned To: <input type="text" [(ngModel)]="newAssignee_name"  /> <br/>
+
+        Title: <input type="text" [(ngModel)]="newTitle"  /> <br/>
+        <!-- Set to drop down only-->
+        <label for="status">Status:</label>
+        <select class="form-control" id="status" [(ngModel)]="newStatus" name="status_name" required>
+            <option value="Open">Open</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Resolved">Resolved</option>
+        </select>
+
+        Details: <input type="text" [(ngModel)]="newDetails"  /> <br/>
+
+        <button (click)="addTicket()">Save</button>
+        <button (click)="cancelTicket()">Cancel</button>
+
+    </div>
+</div>

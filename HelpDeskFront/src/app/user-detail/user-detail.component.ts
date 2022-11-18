@@ -27,23 +27,4 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  // in hindsight - do we really care about being able to add, edit, or delete a user?
-  // i think no, doesn't really make sense in a help desk setting
-
-  turnOnEdit(){
-    this.editObject.user_id = this.user.user_id;
-    this.editObject.user_name = this.user.user_name;
-    this.editObject.user_email = this.user.user_email;
-    this.editMode = true;
-  }
-
-  saveChanges(){
-    this.editObject.user_id = this.user.user_id;
-    this.update.emit(this.editObject);
-  }
-
-  cancel(){
-
-  }
 }

@@ -9,6 +9,8 @@ import { TicketViewListComponent } from './ticket-view-list/ticket-view-list.com
 import { TicketviewDetailComponent } from './ticketview-detail/ticketview-detail.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { TicketviewEditComponent } from './ticketview-edit/ticketview-edit.component';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     TicketViewListComponent,
     TicketviewDetailComponent,
     UserListComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    TicketviewEditComponent,
+    FavoritesComponent
   ],
   imports: [
     BrowserModule,
