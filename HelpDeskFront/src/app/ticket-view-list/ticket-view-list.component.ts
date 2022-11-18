@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketViewService } from '../ticket-view.service';
 import { TicketView } from '../ticket-view';
+import { Users } from '../users';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-ticket-view-list',
@@ -24,7 +26,14 @@ export class TicketViewListComponent implements OnInit {
   newResolution = '';
   
   addMode: boolean = false;
-  constructor(private TicketSrv: TicketViewService) { }
+
+  // Users: Users[] = this.UserSrv.getAll(
+  //   (result: Users[]) =>{
+  //     this.Users = result;
+  //   }
+  // );
+
+  constructor(private TicketSrv: TicketViewService, private UserSrv: UsersService) { }
 
   ngOnInit(): void {
     this.refresh();

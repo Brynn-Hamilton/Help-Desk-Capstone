@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TicketView } from '../ticket-view';
+import { Users } from '../users';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-ticketview-detail',

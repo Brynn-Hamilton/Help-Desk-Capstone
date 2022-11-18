@@ -13,7 +13,18 @@
 
         <h1>Add New Ticket</h1>
         <!--Set names to drop down only-->
-        Requested By: <input type="text" [(ngModel)]="newRequester_name" /> <br/>
+        <!--Requested By: <input type="text" [(ngModel)]="newRequester_name" /> <br/> -->
+        
+        <select name="user" id="selectedUser">
+            <ng-container>
+            <!--<option value="{{user.user_id}}">{{user.user_name}}</option> -->
+            </ng-container>
+                 </select>
+
+        <select class="form-control" id="requester" [(ngModel)]="newRequester_name" name="requester_name" required>
+            <option value=""></option>
+        </select>
+
 
         Assigned To: <input type="text" [(ngModel)]="newAssignee_name"  /> <br/>
 
