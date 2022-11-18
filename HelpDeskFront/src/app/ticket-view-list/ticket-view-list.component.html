@@ -1,5 +1,8 @@
 <div>
     <ng-container *ngFor="let ticket of TheList">
-        <app-ticketview-detail [ticket]="ticket"></app-ticketview-detail>
+        <app-ticketview-detail [ticket]="ticket"
+        (delete)="deleteOne($event)"
+        (update)="updateOne($event)"
+        ></app-ticketview-detail>
     </ng-container>
-</div>
+</div> 

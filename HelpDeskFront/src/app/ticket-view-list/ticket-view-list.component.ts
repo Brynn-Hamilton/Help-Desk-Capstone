@@ -22,5 +22,24 @@ export class TicketViewListComponent implements OnInit {
       }
     )
   }
+  
+  deleteOne(id: number){
+    this.TicketSrv.delete(
+      () => {
+        this.refresh()
+      },
+      id
+    );
+  }
+
+updateOne(ticket: TicketView){
+  this.TicketSrv.update(
+    () => {
+
+    },
+
+    ticket
+  );
+}
 
 }

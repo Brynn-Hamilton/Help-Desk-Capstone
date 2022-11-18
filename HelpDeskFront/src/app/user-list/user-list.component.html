@@ -1,0 +1,7 @@
+<div>
+    <ng-container *ngFor="let user of UserList">
+        <app-user-detail [user]="user"
+        (update)="updateOne($event)"
+        ></app-user-detail>
+    </ng-container>
+</div> 

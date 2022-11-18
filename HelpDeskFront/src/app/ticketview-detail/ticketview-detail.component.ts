@@ -21,7 +21,7 @@ export class TicketviewDetailComponent implements OnInit {
     details: '',
     resolvedby_id: 0,
     resolvedby_name: '',
-    resolution: '',
+    resolution: ''
   };
 
   @Output() delete: EventEmitter<number> = new EventEmitter<number>();
@@ -64,18 +64,22 @@ export class TicketviewDetailComponent implements OnInit {
    this.editObject.resolvedby_id = this.ticket.resolvedby_id;
    this.editObject.resolvedby_name = this.ticket.resolvedby_name;
    this.editObject.resolution = this.ticket.resolution;
+   this.editMode = true;
+   this.detailsMode = true;
   }
 
   deleteMe(){
-
+    this.delete.emit(this.ticket.id);
   }
 
   saveChanges(){
-
+    this.editObject.id = this.ticket.id;
+    this.update.emit(this.editObject);
   }
 
   cancel(){
-
+    this.editMode = false;
+    this.detailsMode = false;
   }
 
 }

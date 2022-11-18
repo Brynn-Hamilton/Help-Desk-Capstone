@@ -1,6 +1,31 @@
 
 <div>
-    <div>
+    <div *ngIf="!editMode && !detailsMode">
         {{ ticket.id }} {{ ticket.requester_name }} {{ ticket.title}} {{ ticket.status }} {{ ticket.assignee_name }}
+
+        <!--edit and delete should be in the details mode only-->
+        <button (click)="turnOnEdit()">Edit</button>
+        <!--Add view details button...how do we do thatttt-->
+        <button>View Details</button>
+        <button (click)="deleteMe()">Delete</button>
+    </div>
+
+    <!--details mode-->
+    <div *ngIf="detailsMode">
+
+    </div>
+
+    <!--Edit mode-->
+    <div *ngIf="editMode && detailsMode">
+
+        <!--Need to change once api is calling users so we can use the list of users in the drop down list-->
+        <label for="requester">Requested By:</label>
+        <select class="form-control" id="requester" [(ngModel)]="editObject.requester_name" name="requester_name" required>
+            <option value="Brynn">Brynn Hamilton</option>
+            <option value="Ali">Ali Abbiss</option>
+            <option value="Chris">Christian Boos</option>
+        </select>
+        <button (click)="saveChanges()">Save</button>
+        <button (click)="cancel()">Cancel</button>
     </div>
 </div>

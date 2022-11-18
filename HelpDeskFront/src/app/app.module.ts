@@ -7,12 +7,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TicketViewListComponent } from './ticket-view-list/ticket-view-list.component';
 import { TicketviewDetailComponent } from './ticketview-detail/ticketview-detail.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TicketViewListComponent,
-    TicketviewDetailComponent
+    TicketviewDetailComponent,
+    UserListComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -25,6 +25,7 @@ namespace HelpDeskAPI
 
         public static void DeleteTicket(int id)
         {
+            DB.Delete(new Favorites() { ticket_id = id });
             DB.Delete(new Tickets() { ticket_id = id });
         }
 
