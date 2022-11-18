@@ -1,16 +1,22 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http' ;
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TicketViewListComponent } from './ticket-view-list/ticket-view-list.component';
+import { TicketviewDetailComponent } from './ticketview-detail/ticketview-detail.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TicketViewListComponent,
+    TicketviewDetailComponent
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     FormsModule,
     HttpClientModule
   ],
