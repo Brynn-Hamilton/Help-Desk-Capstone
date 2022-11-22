@@ -1,0 +1,12 @@
+<div>
+    <app-add-ticket (save)="save($event)"></app-add-ticket>
+    <div *ngFor="let ticket of ticketviewList">
+            {{ ticket.id }} {{ ticket.requester_name }} {{ ticket.title }}
+            {{ ticket.status }} {{ ticket.assignee_name }}
+            <button (click)="openTicket(ticket.id)">Open</button>
+    </div>
+
+    <div *ngIf="editTicket.ticket_id > 0">
+        <app-ticket-details [editTicket]="editTicket" (save)="update($event)"></app-ticket-details>
+    </div>
+</div>

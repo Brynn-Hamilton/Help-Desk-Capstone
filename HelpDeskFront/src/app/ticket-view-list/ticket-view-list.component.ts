@@ -3,6 +3,8 @@ import { TicketViewService } from '../ticket-view.service';
 import { TicketView } from '../ticket-view';
 import { Users } from '../users';
 import { UsersService } from '../users.service';
+import { Ticket } from '../ticket';
+import { TicketService } from '../ticket.service';
 
 @Component({
   selector: 'app-ticket-view-list',
@@ -24,23 +26,27 @@ export class TicketViewListComponent implements OnInit {
   newResolvedBy_id = 0;
   newResolvedBy_name = '';
   newResolution = '';
+
   
   addMode: boolean = false;
 
-  // Users: Users[] = this.UserSrv.getAll(
-  //   (result: Users[]) =>{
-  //     this.Users = result;
-  //   }
-  // );
+ TheUsers: Users[] = [];
 
-  constructor(private TicketSrv: TicketViewService, private UserSrv: UsersService) { }
+  constructor(private TicketViewSrv: TicketViewService, private UserSrv: UsersService, private TicketSrv: TicketService ) { 
+
+  UserSrv.getAll(
+    (result: Users[]) => {
+      this.TheUsers = result
+    }
+  );
+  }
 
   ngOnInit(): void {
     this.refresh();
   }
 
   refresh(){
-    this.TicketSrv.getAll(
+    this.TicketViewSrv.getAll(
       (result: TicketView[]) => {
         this.TheList = result;
       }
@@ -52,23 +58,18 @@ export class TicketViewListComponent implements OnInit {
   }
 
   addTicket(){
-    let newTicket: TicketView = {
-      id: 0,
+    let newTicket: Ticket = {
+      ticket_id: 0,
       requester_id: 0,
-      requester_name: this.newRequester_name,
-      requester_email: '',
       assignee_id: 0,
-      assignee_name: this.newRequester_name,
-      assignee_email: '',
-      title: this.newTitle,
-      status: this.newStatus,
-      details: this.newDetails,
+      subject_title: this.newTitle,
+      ticket_status: this.newStatus,
+      ticket_details: this.newDetails,
       resolvedby_id: 0,
-      resolvedby_name: this.newResolvedBy_name,
-      resolution: this.newResolution
+      ticket_resolution: this.newResolution
     }
-     this.TicketSrv.add(
-      (result: TicketView) => {
+     this.TicketSrv.addTicket(
+      (result: Ticket) => {
         this.refresh();
       },
       newTicket
@@ -90,7 +91,7 @@ export class TicketViewListComponent implements OnInit {
   }
   
   deleteOne(id: number){
-    this.TicketSrv.delete(
+    this.TicketSrv.deleteTicket(
       () => {
         this.refresh()
       },
@@ -98,8 +99,8 @@ export class TicketViewListComponent implements OnInit {
     );
   }
 
-updateOne(ticket: TicketView){
-  this.TicketSrv.update(
+updateOne(ticket: Ticket){
+  this.TicketSrv.updateTicket(
     () => {
 
     },

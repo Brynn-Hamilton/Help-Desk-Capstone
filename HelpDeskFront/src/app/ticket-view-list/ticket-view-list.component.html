@@ -1,7 +1,7 @@
 <div *ngIf="!addMode">
     <button (click)="showAddForm()">New Ticket</button>
     <ng-container *ngFor="let ticket of TheList">
-        <app-ticketview-detail [ticket]="ticket"
+        <app-ticketview-detail [ticketDisplay]="ticket"
         (delete)="deleteOne($event)"
         (update)="updateOne($event)"
         ></app-ticketview-detail>
@@ -12,33 +12,34 @@
     <div>
 
         <h1>Add New Ticket</h1>
-        <!--Set names to drop down only-->
-        <!--Requested By: <input type="text" [(ngModel)]="newRequester_name" /> <br/> -->
+
+        Title: <input type="text" /><br />
         
-        <select name="user" id="selectedUser">
-            <ng-container>
-            <!--<option value="{{user.user_id}}">{{user.user_name}}</option> -->
-            </ng-container>
-                 </select>
-
-        <select class="form-control" id="requester" [(ngModel)]="newRequester_name" name="requester_name" required>
-            <option value=""></option>
+        Status:
+        <select>
+            <option>Open</option>
+            <option>In Progress</option>
+            <option>Closed</option>
         </select>
 
-
-        Assigned To: <input type="text" [(ngModel)]="newAssignee_name"  /> <br/>
-
-        Title: <input type="text" [(ngModel)]="newTitle"  /> <br/>
-        <!-- Set to drop down only-->
-        <label for="status">Status:</label>
-        <select class="form-control" id="status" [(ngModel)]="newStatus" name="status_name" required>
-            <option value="Open">Open</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Resolved">Resolved</option>
+        Requested By:
+        <select>
+            <option *ngFor="let user of TheUsers" [value]="user.user_id">{{ user.user_name }}</option>
         </select>
 
-        Details: <input type="text" [(ngModel)]="newDetails"  /> <br/>
+        Details: <input type="text" /><br />
 
+        Assigned To:
+        <select>
+            <option *ngFor="let user of TheUsers" [value]="user.user_id">{{ user.user_name }}</option>
+        </select>
+            
+        Resolved By:
+        <select>
+            <option *ngFor="let user of TheUsers" [value]="user.user_id">{{ user.user_name }}</option>
+        </select>
+
+        Resolution: <input type="text" /><br />
         <button (click)="addTicket()">Save</button>
         <button (click)="cancelTicket()">Cancel</button>
 

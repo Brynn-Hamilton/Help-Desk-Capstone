@@ -6,6 +6,7 @@ namespace HelpDeskAPI
     public class TicketView
     {
         public int id { get; set; }
+        // can remove the id?
         public int requester_id { get; set; }
         public string requester_name { get; set; }
         public string requester_email { get; set; }

@@ -13,7 +13,7 @@ namespace HelpDeskAPI
         public string subject_title { get; set; }
         public string ticket_status { get; set; }
         public string ticket_details { get; set; }
-        public int resolvedby_id { get; set; }
+        public int? resolvedby_id { get; set; }
         public string ticket_resolution { get; set; }
     }
 }

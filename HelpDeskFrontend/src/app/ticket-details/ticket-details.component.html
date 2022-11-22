@@ -1,0 +1,38 @@
+<div>
+    <h2>Ticket Detail</h2>
+    Title: <input type="text" [(ngModel)]="editTicket.subject_title" /><br  />
+    Status: 
+    <select [(ngModel)]="editTicket.ticket_status" >
+        <option>Open</option>
+        <option>In Progress</option>
+        <option>Closed</option>
+    </select>
+    <br>
+
+    Requested By:
+    <select [(ngModel)]="editTicket.requester_id">
+        <option *ngFor="let user of TheUsers" [value]="user.user_id">{{ user.user_name }}</option>
+    </select>
+    <br>
+
+    Details: <input type="text" [(ngModel)]="editTicket.ticket_details" /><br  />
+
+    Assigned To:
+    <select [(ngModel)]="editTicket.assignee_id">
+        <option *ngFor="let user of TheUsers" [value]="user.user_id">{{ user.user_name }}</option>
+    </select>
+    <br>
+
+    Resolved By:
+    <select [(ngModel)]="editTicket.resolvedby_id">
+        <option *ngFor="let user of TheUsers" [value]="user.user_id">{{ user.user_name }}</option>
+    </select>
+    <br>
+
+    Resolution: <input type="text" [(ngModel)]="editTicket.ticket_resolution" /><br  />
+    
+    <button (click)="saveIt()">Save</button>
+    <!--want to have something for adding to favorites list while viewing details-->
+    <button>Favorite</button>
+    <button>Cancel</button>
+</div>

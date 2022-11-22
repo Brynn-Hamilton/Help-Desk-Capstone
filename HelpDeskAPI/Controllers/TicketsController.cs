@@ -7,6 +7,7 @@ namespace HelpDeskAPI.Controllers
     [ApiController]
     public class TicketsController : ControllerBase
     {
+        [HttpGet("view")]
         public IEnumerable<TicketView> GetAll()
         {
              List<Tickets> tickets = DAL.GetAllTickets();
@@ -22,6 +23,12 @@ namespace HelpDeskAPI.Controllers
                 ticketViews.Add(finalTicketView);
             }
             return ticketViews;
+        }
+
+        [HttpGet("{ticket_id}")]
+        public Tickets GetOne(int id)
+        {
+            return DAL.GetOne(id);
         }
 
         [HttpPost]

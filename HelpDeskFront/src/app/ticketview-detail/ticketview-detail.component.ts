@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TicketView } from '../ticket-view';
 import { Users } from '../users';
 import { UsersService } from '../users.service';
+import { Ticket } from '../ticket';
+import { TicketService } from '../ticket.service';
 
 @Component({
   selector: 'app-ticketview-detail',
@@ -10,7 +12,18 @@ import { UsersService } from '../users.service';
 })
 export class TicketviewDetailComponent implements OnInit {
 
-  @Input() ticket: TicketView = {
+  @Input() ticket: Ticket = {
+    ticket_id: 0,
+    requester_id: 0,
+    assignee_id: 0,
+    subject_title: '',
+    ticket_status: '',
+    ticket_details: '',
+    resolvedby_id: 0,
+    ticket_resolution: ''
+  };
+
+  @Input() ticketDisplay: TicketView = {
     id: 0,
     requester_id: 0,
     requester_name: '',
@@ -27,28 +40,31 @@ export class TicketviewDetailComponent implements OnInit {
   };
 
   @Output() delete: EventEmitter<number> = new EventEmitter<number>();
-  @Output() update: EventEmitter<TicketView> = new EventEmitter<TicketView>();
+  @Output() update: EventEmitter<Ticket> = new EventEmitter<Ticket>();
 
   detailsMode: boolean = false;
   editMode: boolean = false;
-  editObject: TicketView = {
-    id: 0,
+  editObject: Ticket = {
+    ticket_id: 0,
     requester_id: 0,
-    requester_name: '',
-    requester_email: '',
     assignee_id: 0,
-    assignee_name: '',
-    assignee_email: '',
-    title: '',
-    status: '',
-    details: '',
+    subject_title: '',
+    ticket_status: '',
+    ticket_details: '',
     resolvedby_id: 0,
-    resolvedby_name: '',
-    resolution: '',
+    ticket_resolution: ''
   };
 
-  constructor() { }
+  TheUsers: Users[] = [];
 
+  constructor(private UserSrv: UsersService, private TicketSrv: TicketService){ 
+    UserSrv.getAll(
+      (result: Users[]) => {
+        this.TheUsers = result
+      }
+    );
+  }
+    
   ngOnInit(): void {
   }
 
@@ -56,29 +72,24 @@ export class TicketviewDetailComponent implements OnInit {
     this.detailsMode = true;
   }
   turnOnEdit(){
-   this.editObject.id = this.ticket.id;
+   this.editObject.ticket_id = this.ticket.ticket_id;
    this.editObject.requester_id = this.ticket.requester_id;
-   this.editObject.requester_name = this.ticket.requester_name;
-   this.editObject.requester_email = this.ticket.requester_email;
    this.editObject.assignee_id = this.ticket.assignee_id;
-   this.editObject.assignee_name = this.ticket.assignee_name;
-   this.editObject.assignee_email = this.ticket.assignee_email;
-   this.editObject.title = this.ticket.title;
-   this.editObject.status = this.ticket.status;
-   this.editObject.details = this.ticket.details;
+   this.editObject.subject_title = this.ticket.subject_title;
+   this.editObject.ticket_status = this.ticket.ticket_status;
+   this.editObject.ticket_details = this.ticket.ticket_details;
    this.editObject.resolvedby_id = this.ticket.resolvedby_id;
-   this.editObject.resolvedby_name = this.ticket.resolvedby_name;
-   this.editObject.resolution = this.ticket.resolution;
+   this.editObject.ticket_resolution = this.ticket.ticket_resolution;
    this.editMode = true;
-   this.detailsMode = true;
+   this.detailsMode = false;
   }
 
   deleteMe(){
-    this.delete.emit(this.ticket.id);
+    this.delete.emit(this.ticket.ticket_id);
   }
 
   saveChanges(){
-    this.editObject.id = this.ticket.id;
+    this.editObject.ticket_id = this.ticket.ticket_id;
     this.update.emit(this.editObject);
   }
 
@@ -86,5 +97,6 @@ export class TicketviewDetailComponent implements OnInit {
     this.editMode = false;
     this.detailsMode = false;
   }
-
 }
+
+

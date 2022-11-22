@@ -1,0 +1,38 @@
+<div>
+    <h2>Add New Ticket</h2>
+    Title: <input type="text" [(ngModel)]="newTicket.subject_title" /><br  />
+    Status: 
+    <select [(ngModel)]="newTicket.ticket_status" >
+        <option>Open</option>
+        <option>In Progress</option>
+        <option>Closed</option>
+    </select>
+    <br>
+
+    Requested By:
+    <select [(ngModel)]="newTicket.requester_id">
+        <option *ngFor="let user of TheUsers" [value]="user.user_id">{{ user.user_name }}</option>
+    </select>
+    <br>
+
+    Details: <input type="text" [(ngModel)]="newTicket.ticket_details" /><br  />
+
+    Assigned To:
+    <select [(ngModel)]="newTicket.assignee_id">
+        <option *ngFor="let user of TheUsers" [value]="user.user_id">{{ user.user_name }}</option>
+    </select>
+    <br>
+
+    Resolved By:
+    <select [(ngModel)]="newTicket.resolvedby_id">
+        <option *ngFor="let user of TheUsers" [value]="user.user_id">{{ user.user_name }}</option>
+    </select>
+    <br>
+
+    Resolution: <input type="text" [(ngModel)]="newTicket.ticket_resolution" /><br  />
+    
+    <button (click)="saveIt()">Save</button>
+    <button>Cancel</button>
+</div>
+
+

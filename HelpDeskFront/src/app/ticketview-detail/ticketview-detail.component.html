@@ -1,18 +1,19 @@
 
 <div>
     <div *ngIf="!editMode && !detailsMode">
-        {{ ticket.id }} {{ ticket.requester_name }} {{ ticket.title}} {{ ticket.status }} {{ ticket.assignee_name }}
+        {{ ticketDisplay.id }} {{ ticketDisplay.requester_name }} {{ ticketDisplay.title}} {{ ticketDisplay.status }} 
+        {{ ticketDisplay.assignee_name }}
         <button (click)="viewDetails()">View Details</button>
     </div>
 
     <!--details mode-->
     <div *ngIf="detailsMode">
-        {{ ticket.id }} {{ ticket.title}}<br>
-        {{ ticket.status }} <br>
-        {{ ticket.requester_name }}                 {{ ticket.assignee_name }} <br>
-        {{ ticket.requester_email }}                {{ ticket.assignee_email }} <br>
-        {{ ticket.details }} <br>
-        {{ ticket.resolution }}                     {{ ticket.resolvedby_name }}
+        {{ ticketDisplay.id }} {{ ticketDisplay.title}}<br>
+        {{ ticketDisplay.status }} <br>
+        {{ ticketDisplay.requester_name }}                 {{ ticketDisplay.assignee_name }} <br>
+        {{ ticketDisplay.requester_email }}                {{ ticketDisplay.assignee_email }} <br>
+        {{ ticketDisplay.details }} <br>
+        {{ ticketDisplay.resolution }}                     {{ ticketDisplay.resolvedby_name }}
 
         
         <button (click)="turnOnEdit()">Edit</button>
@@ -20,15 +21,38 @@
     </div>
 
     <!--Edit mode-->
-    <div *ngIf="editMode">
+    <div *ngIf="editMode && !detailsMode">
 
         <!--Need to change once api is calling users so we can use the list of users in the drop down list-->
-        <label for="requester">Requested By:</label>
-        <select class="form-control" id="requester" [(ngModel)]="editObject.requester_name" name="requester_name" required>
-            <option value="Brynn">Brynn Hamilton</option>
-            <option value="Ali">Ali Abbiss</option>
-            <option value="Chris">Christian Boos</option>
+        Title: <input type="text" [(ngModel)]="this.ticketDisplay.title" /><br />
+        
+        Status:
+        <select [(ngModel)]="this.ticketDisplay.status">
+            <option>Open</option>
+            <option>In Progress</option>
+            <option>Closed</option>
         </select>
+
+        Requested By:
+        <select [(ngModel)]="this.ticketDisplay.requester_id">
+            <option *ngFor="let user of TheUsers" [value]="user.user_id">{{ user.user_name }}</option>
+        </select>
+
+        Details: <input type="text" [(ngModel)]="this.ticketDisplay.details" /><br />
+
+        Assigned To:
+        <select [(ngModel)]="this.ticketDisplay.assignee_id">
+            <option *ngFor="let user of TheUsers" [value]="user.user_id">{{ user.user_name }}</option>
+        </select>
+        
+
+        Resolved By:
+        <select [(ngModel)]="this.ticket.resolvedby_id">
+            <option *ngFor="let user of TheUsers" [value]="user.user_id">{{ user.user_name }}</option>
+        </select>
+
+        Resolution: <input type="text" [(ngModel)]="this.ticketDisplay.resolution" /><br />
+
         <button (click)="saveChanges()">Save</button>
         <button (click)="cancel()">Cancel</button>
     </div>
